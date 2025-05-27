@@ -1,52 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Dice from './Dice';
-
-function Form() {
-  const [name, setName] = useState('');
-
-  const users = ['Alice', name, 'Charlie']; // ✅ move logic outside JSX
-
-  return (
-    <>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Type your name"
-      />
-      <p>Hello, {name}!</p>
-
-      <ul>
-        {users.map(user => (
-          <li key={user}>{user}</li>
-        ))}
-      </ul>
-    </>
-  );
-}
-
-function Card({ title = "Untitled", content = "No content yet" }) {
-  return (
-    <div className="card">
-      <h2>{title}</h2>
-      <p>{content}</p>
-    </div>
-  );
-}
+import { useState } from "react";
+import Dice from "./Dice";
 
 function App() {
+  const [diceValues, setDiceValues] = useState([null, null, null]);
+
+  function rollAll() {
+    const newValues = diceValues.map(() => Math.floor(Math.random() * 6) + 1);
+    setDiceValues(newValues);
+  }
+
   return (
-    <>
-      <h1>Vite + React</h1>
-      <Form />
-      <Card />
-      <Dice />
-      <Dice />
-      <Dice />
-    </>
+    <main>
+      <h1>Dice Party 🎲</h1>
+      <div style={{ display: "flex", gap: "1rem" }}>
+        {diceValues.map((val, i) => (
+          <Dice key={i} value={val} />
+        ))}
+      </div>
+      <button onClick={rollAll}>Roll All</button>
+    </main>
   );
 }
 
-export default App
+export default App;
