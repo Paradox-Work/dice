@@ -5,6 +5,8 @@ import dice3 from "./assets/dice/dice-3.svg";
 import dice4 from "./assets/dice/dice-4.svg";
 import dice5 from "./assets/dice/dice-5.svg";
 import dice6 from "./assets/dice/dice-6.svg";
+import "./Dice.css";
+
 
 const diceImages = [dice0, dice1, dice2, dice3, dice4, dice5, dice6];
 
@@ -13,7 +15,7 @@ function Dice({ value }) {
   // Note: diceImages is 0-based: diceImages[0] = dice0 (null image), diceImages[1] = dice1 etc.
   const imageIndex = value === null || value === undefined ? 0 : value;
   return (
-    <div>
+    <article className="dice">
       <img
         src={diceImages[imageIndex]}
         alt={"Metamais kauliņš " + (value ?? "?")}
@@ -22,7 +24,7 @@ function Dice({ value }) {
       <p>
         Tu uzmeti: <strong>{value ?? "?"}</strong>
       </p>
-    </div>
+    </article>
   );
 }
 
